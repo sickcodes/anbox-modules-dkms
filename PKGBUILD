@@ -14,7 +14,7 @@ source=("https://github.com/choff/anbox-modules/archive/refs/heads/master.zip")
 sha256sums=('SKIP')
 
 prepare() {
-  tar -zxf "${pkgname}_${pkgver}".tar.gz
+  unzip "master.zip"
 }
 
 build() {
