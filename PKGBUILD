@@ -4,7 +4,7 @@
 _pkgbase=anbox-modules
 pkgname=anbox-modules-dkms
 pkgver=5
-_extramodules="$(uname -r)"
+_extramodules=$(uname -r)
 pkgrel=7
 pkgdesc="Android kernel driver (binder, ashmem) in DKMS format"
 arch=('i686' 'x86_64')
@@ -21,33 +21,28 @@ sha256sums=('SKIP')
 
 build() {
 
-  cd "${srcdir}/anbox-modules/binder"
-  msg2 "Building binder..."
-  make
+  # cd "${srcdir}/anbox-modules/binder"
+  # msg2 "Building binder..."
+  # make
 
   cd "${srcdir}/anbox-modules/ashmem"
   msg2 "Building ashmem..."
   make
 }
 
-_get_package_version() {
-  grep PACKAGE_VERSION "${srcdir}/anbox-modules/${1}/dkms.conf" | sed -r 's#PACKAGE_VERSION="([0-9.]+)"#\1#'
-}
-
 package() {
-  _dkms_version_binder="$(_get_package_version binder)"
-  _dkms_version_ashmem="$(_get_package_version ashmem)"
+  _dkms_version_binder="$(grep PACKAGE_VERSION "${srcdir}/anbox-modules/binder/dkms.conf" | sed -r 's#PACKAGE_VERSION="([0-9.]+)"#\1#')"
+  _dkms_version_ashmem="$(grep PACKAGE_VERSION "${srcdir}/anbox-modules/ashmem/dkms.conf" | sed -r 's#PACKAGE_VERSION="([0-9.]+)"#\1#')"
 
-  dkms_dir_binder="${pkgdir}/usr/src/anbox-ashmem-$_dkms_version_ashmem/"
-  dkms_dir_ashmem="${pkgdir}/usr/src/anbox-binder-$_dkms_version_binder/"
+  dkms_dir_binder="${pkgdir}/usr/src/anbox-ashmem-${_dkms_version_ashmem}/"
+  dkms_dir_ashmem="${pkgdir}/usr/src/anbox-binder-${_dkms_version_binder}/"
 
   mkdir -p "${pkgdir}/usr/lib/modules/${_extramodules}"
 
-  cd "${srcdir}/anbox-modules/binder"
-  mkdir -p "$pkgdir/usr/src/${dkms_dir_binder}"
-  install -Ddm755 "${dkms_dir}"
-  install -D -m644 "${srcdir}/anbox-modules/binder/dkms.conf" "$pkgdir/usr/src/${dkms_dir_binder}/dkms.conf"
-  make DESTDIR="${pkgdir}/usr/lib/modules/${_extramodules}" install
+  # cd "${srcdir}/anbox-modules/binder"
+  # mkdir -p "$pkgdir/usr/src/${dkms_dir_binder}"
+  # install -D -m644 "${srcdir}/anbox-modules/binder/dkms.conf" "$pkgdir/usr/src/${dkms_dir_binder}/dkms.conf"
+  # make DESTDIR="${pkgdir}/usr/lib/modules/${_extramodules}" install
 
   cd "${srcdir}/anbox-modules/ashmem"
   mkdir -p "$pkgdir/usr/src/${dkms_dir_ashmem}"
