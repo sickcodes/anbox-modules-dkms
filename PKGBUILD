@@ -1,6 +1,7 @@
 # Maintainer: Sick Codes <info a t sick dot codes>
 # Contributor: Tobias Martin <tm-x at gmx dot net>
 
+_pkgbase=anbox-modules
 pkgname=anbox-modules-dkms
 pkgver=5
 _extramodules="$(uname -r)"
@@ -29,17 +30,30 @@ build() {
   make
 }
 
+_get_package_version() {
+  grep PACKAGE_VERSION "${srcdir}/anbox-modules/${1}/dkms.conf" | sed -r 's#PACKAGE_VERSION="([0-9.]+)"#\1#'
+}
+
 package() {
+  _dkms_version_binder="$(_get_package_version binder)"
+  _dkms_version_ashmem="$(_get_package_version ashmem)"
+
+  dkms_dir_binder="${pkgdir}/usr/src/anbox-ashmem-$_dkms_version_ashmem/"
+  dkms_dir_ashmem="${pkgdir}/usr/src/anbox-binder-$_dkms_version_binder/"
+
   mkdir -p "${pkgdir}/usr/lib/modules/${_extramodules}"
-  cd "${srcdir}/binder"
-  mkdir -p "$pkgdir/usr/src/binder"
-  install -D -m644 "$srcdir/binder/dkms.conf" "$pkgdir/usr/src/binder/dkms.conf"
+
+  cd "${srcdir}/anbox-modules/binder"
+  mkdir -p "$pkgdir/usr/src/${dkms_dir_binder}"
+  install -Ddm755 "${dkms_dir}"
+  install -D -m644 "${srcdir}/anbox-modules/binder/dkms.conf" "$pkgdir/usr/src/${dkms_dir_binder}/dkms.conf"
   make DESTDIR="${pkgdir}/usr/lib/modules/${_extramodules}" install
 
-  cd "${srcdir}/ashmem"
-  mkdir -p "$pkgdir/usr/src/ashmem"
-  install -D -m644 "$srcdir/ashmem/dkms.conf" "$pkgdir/usr/src/ashmem/dkms.conf"
+  cd "${srcdir}/anbox-modules/ashmem"
+  mkdir -p "$pkgdir/usr/src/${dkms_dir_ashmem}"
+  install -D -m644 "${srcdir}/anbox-modules/ashmem/dkms.conf" "$pkgdir/usr/src/${dkms_dir_ashmem}/dkms.conf"
   make DESTDIR="${pkgdir}/usr/lib/modules/${_extramodules}" install
+
 }
 
 # vim:set ts=2 sw=2 et:
