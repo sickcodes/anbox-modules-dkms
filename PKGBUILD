@@ -1,4 +1,5 @@
-# Maintainer: Tobias Martin <tm-x at gmx dot net>
+# Maintainer: Sick Codes <info a t sick dot codes>
+# Contributor: Tobias Martin <tm-x at gmx dot net>
 
 pkgname=anbox-modules-dkms
 pkgver=4
@@ -9,8 +10,8 @@ arch=('i686' 'x86_64')
 license=('GPLv3')
 provides=($pkgname)
 depends=('linux-headers')
-source=("https://launchpad.net/~morphis/+archive/ubuntu/anbox-support/+files/${pkgname}_${pkgver}.tar.gz")
-sha256sums=('fa322cf025a87c69d50a08b1b007503fa00daf09db08366f3507ac3873bd8d39')
+source=("https://github.com/choff/anbox-modules/archive/refs/heads/master.zip")
+sha256sums=('SKIP')
 
 prepare() {
   tar -zxf "${pkgname}_${pkgver}".tar.gz
