@@ -14,6 +14,16 @@ However, a user named @Choff has included some patches here:
 
 This repo will be used to fix the anbox modules for 5.7+.
 
+### This project was created for use in:
+- Next Generation Anbox Style LXC: [https://github.com/sickcodes/droid-native](https://github.com/sickcodes/droid-native)
+
+- Android in a Docker using [BlissOS](https://blissos.org/): [https://github.com/sickcodes/dock-droid](https://github.com/sickcodes/dock-droid)
+
+- binder(fs) and ashmem for use in anbox related 5.7+ Kernel distribuitons (soon to be all): [https://github.com/sickcodes/anbox-modules-dkms](https://github.com/sickcodes/anbox-modules-dkms)
+
+- WayDroid: [https://github.com/waydroid/waydroid](https://github.com/waydroid/waydroid)
+
+
 # Patches 
 
 `git submodule add https://github.com/choff/anbox-modules
