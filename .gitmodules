@@ -1,3 +1,3 @@
-[submodule "anbox-modules"]
-	path = anbox-modules
-	url = https://github.com/choff/anbox-modules
+[submodule "anbox-modules-dkms"]
+	path = anbox-modules-dkms
+	url = https://github.com/sickcodes/anbox-modules-dkms

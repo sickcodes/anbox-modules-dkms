@@ -2,6 +2,14 @@
 
 # Next Generation Box Modules DKMS (ngbox)
 
+### [https://aur.archlinux.org/packages/anbox-modules-dkms](https://aur.archlinux.org/packages/anbox-modules-dkms)
+
+
+Maintained by Christian Hoff [@choff](https://github.com/choff): [https://github.com/choff/anbox-modules](https://github.com/choff/anbox-modules)
+
+The AUR package is maintained here: [https://github.com/sickcodes/aur/tree/master/anbox-modules-dkms](https://github.com/sickcodes/aur/tree/master/anbox-modules-dkms)
+
+
 Resurrected aur.archlinux.org/anbox-modules-dkms for maintenance 
 
 As per the Arch Wiki, https://wiki.archlinux.org/title/Anbox#Old_kernels
